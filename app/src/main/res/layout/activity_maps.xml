@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MapsActivity">
+
+    <FrameLayout
+        android:id="@+id/fragment_container1"
+
+        android:name="com.example.practicacalificada02_fragmentos.SimpleFragment"
+        android:layout_width="411dp"
+        android:layout_height="61dp"
+        android:orientation="vertical"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout="@layout/fragment_simple">
+
+        <Spinner
+            android:id="@+id/spn_location"
+            android:layout_width="286dp"
+            android:layout_height="38dp"
+            android:layout_gravity="center"
+            app:layout_constraintRight_toLeftOf="@+id/textView" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:name="com.google.android.gms.maps.SupportMapFragment"
+        android:layout_width="413dp"
+        android:layout_height="673dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_container1"
+        tools:context=".MapsActivity"
+        tools:ignore="MissingConstraints">
+
+    </FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
