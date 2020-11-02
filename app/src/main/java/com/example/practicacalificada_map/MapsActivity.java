@@ -10,6 +10,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -85,39 +86,34 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
                             latitud = 35.680513;
                             longitud = 139.769051;
-                            LatLng casa = new LatLng(latitud, longitud);
-                            mMap.addMarker(new MarkerOptions().position(casa).title("Marker in Japan"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa, 15));
+                            //MoverCamara(latitud,longitud);
                             CalcularDistancia(latitud,longitud);
-
+                            ColocarIcono((R.drawable.world), latitud, longitud, "Japan");
                             break;
                         case 1:
                             mMap.setMapType(GoogleMap.MAP_TYPE_SATELLITE);
                             latitud = 52.516934;
                             longitud = 13.403190;
-                            LatLng casa1 = new LatLng(latitud, longitud);
-                            mMap.addMarker(new MarkerOptions().position(casa1).title("Marker in Germany"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa1, 15));
+                            //MoverCamara(latitud,longitud);
                             CalcularDistancia(latitud,longitud);
+                            ColocarIcono((R.drawable.satellite), latitud, longitud, "Germany");
 
                             break;
                         case 2:
                             mMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
                             latitud = 41.902609;
                             longitud = 12.494847;
-                            LatLng casa2 = new LatLng(latitud, longitud);
-                            mMap.addMarker(new MarkerOptions().position(casa2).title("Marker in Italy"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa2, 15));
+                            //MoverCamara(latitud,longitud);
                             CalcularDistancia(latitud,longitud);
+                            ColocarIcono((R.drawable.mountains), latitud, longitud, "Italy");
                             break;
                         case 3:
                             mMap.setMapType(GoogleMap.MAP_TYPE_TERRAIN);
                             latitud = 48.843489;
                             longitud = 2.355331;
-                            LatLng casa3 = new LatLng(latitud, longitud);
-                            mMap.addMarker(new MarkerOptions().position(casa3).title("Marker in French"));
-                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa3, 15));
+                            //MoverCamara(latitud,longitud);
                             CalcularDistancia(latitud,longitud);
+                            ColocarIcono((R.drawable.plain), latitud, longitud, "French");
                             break;
                     }
                 } else {
@@ -130,6 +126,25 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return;
             }
         });
+    }
+
+    public void ColocarIcono(int icon, Double latitud, Double longitud, String countryt )
+    {
+        LatLng country = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(country).title("Marker in" + countryt));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(country, 15));
+
+        GroundOverlayOptions countryOverlay = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(icon))
+                .position(country, 50);
+        mMap.addGroundOverlay(countryOverlay);
+    }
+
+    public void MoverCamara(Double latitud, Double longitud)
+    {
+        LatLng casa = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(casa).title("Marker in Japan"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa, 15));
     }
 
     public void CalcularDistancia(Double latitud, Double longitud)
@@ -226,14 +241,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         }
 
 
-        LatLng casa = new LatLng(latitud, longitud);
-        mMap.addMarker(new MarkerOptions().position(casa).title("Marker in Japan"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(casa, zoom));
+        LatLng japan = new LatLng(latitud, longitud);
+        mMap.addMarker(new MarkerOptions().position(japan).title("Marker in Japan"));
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(japan, zoom));
 
-        GroundOverlayOptions casaOverlay = new GroundOverlayOptions()
-                .image(BitmapDescriptorFactory.fromResource(R.drawable.home))
-                .position(casa, 50);
-        mMap.addGroundOverlay(casaOverlay);
+        GroundOverlayOptions japanOverlay = new GroundOverlayOptions()
+                .image(BitmapDescriptorFactory.fromResource(R.drawable.world))
+                .position(japan, 50);
+        mMap.addGroundOverlay(japanOverlay);
 
         setMapLongClick(mMap);
         setPoiClick(mMap);
